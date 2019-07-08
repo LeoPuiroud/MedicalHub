@@ -72,13 +72,13 @@ public class PatientRestController {
 	@GetMapping(value= {"/{username}"})
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<Patient> findByUsername(@PathVariable(name="username")String username){
-		return findPatientByUsername(username);
+		return findByUsername(username);
 	}
 	
 	@GetMapping(value= {"/{username}/rdv"})
 	@JsonView(JsonViews.PatientAvecRdv.class)
 	public ResponseEntity<Patient> findByUsernameWithRdv(@PathVariable(name="username")String username){
-		return findPatientByUsername(username);
+		return findByUsername(username);
 	}
 	
 	private ResponseEntity<Patient> findPatienttByUsername( String username){
@@ -106,10 +106,10 @@ public class PatientRestController {
 	}
 	
 	@DeleteMapping("/{username}")
-	public ResponseEntity<Patient> delete(@PathVariable(name="username") Username username){
-		Optional<Patient> opt=patientRepository.findByUsername(username);
+	public ResponseEntity<Patient> delete(@PathVariable(name="username") Integer id){
+		Optional<Patient> opt=patientRepository.findById(id);
 		if (opt.isPresent()) {
-			patientRepository.deleteByUsername(username);
+			patientRepository.deleteById(id);
 			return new  ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return new  ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -9,11 +9,6 @@ public class ProjetMedicalHubApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetMedicalHubApplication.class, args);
-	
-		
-
-		
-		
 	}
 
 }

@@ -58,7 +58,7 @@ public class PraticienRestController {
 		}
 		praticienRepository.save(praticien);
 		HttpHeaders headers=new HttpHeaders();
-		URI uri=ucb.path("/rest/praticien/{id}").buildAndExpand(praticien.getId()).toUri();
+		URI uri=ucb.path("/rest/praticien/{id}").buildAndExpand(praticien.getUsername()).toUri();
 		headers.setLocation(uri);
 		return new ResponseEntity<Void>(headers,HttpStatus.CREATED);
 	}
@@ -66,13 +66,13 @@ public class PraticienRestController {
 	@GetMapping(value= {"/{id}"})
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<Praticien> findById(@PathVariable(name="id")Integer id){
-		return findPraticienById(id);
+		return findById(id);
 	}
 	
 	@GetMapping(value= {"/{id}/arme"})
 	@JsonView(JsonViews.PraticienAvecRdv.class)
 	public ResponseEntity<Praticien> findByIdWithRdv(@PathVariable(name="id")Integer id){
-		return findPraticienById(id);
+		return findById(id);
 	}
 	
 	private ResponseEntity<Praticien> findSoldatById( Integer id){
@@ -92,7 +92,7 @@ public class PraticienRestController {
 			praticienEnBase.setNom((praticien.getNom()!=null)?praticien.getNom():praticienEnBase.getNom());
 			praticienEnBase.setDrdv((praticien.getDrdv()!=null)?praticien.getDrdv():praticienEnBase.getDrdv());
 			praticienEnBase.setAdresses((praticien.getAdresses()!=null)?praticien.getAdresses():praticienEnBase.getAdresses());
-			praticienEnBase.setSpecs((praticien.getSpecs()!=null)?praticien.getSpecs():praticienEnBase.getSpecs());
+			//praticienEnBase.setSpecs((praticien.getSpecs()!=null)?praticien.getSpecs():praticienEnBase.getSpecs());
 			praticienEnBase.setMotifs((praticien.getMotifs()!=null)?praticien.getMotifs():praticienEnBase.getMotifs());
 			
 			praticienRepository.save(praticienEnBase);

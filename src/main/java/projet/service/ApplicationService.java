@@ -1,78 +1,71 @@
 package projet.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import projet.metier.Adresse;
 import projet.metier.Motif;
 import projet.metier.Patient;
 import projet.metier.Praticien;
+import projet.metier.PraticienSpecialite;
+import projet.metier.PraticienSpecialiteKey;
 import projet.metier.Rdv;
 import projet.metier.Specialite;
+import projet.repository.AdresseRepository;
 import projet.repository.MotifRepository;
 import projet.repository.PatientRepository;
 import projet.repository.PraticienRepository;
+import projet.repository.PraticienSpecialiteRepository;
 import projet.repository.RdvRepository;
+import projet.repository.SpecialiteRepository;
 import projet.repository.UserRepository;
 
 @Service
 public class ApplicationService implements CommandLineRunner {
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
-	 private PatientRepository pr ;
-	
+	private PatientRepository pr;
+
 	@Autowired
-	 private MotifRepository mr;
-	
+	private MotifRepository mr;
+
 	@Autowired
-	 private PraticienRepository dr ;
-	
+	private PraticienRepository dr;
+
 	@Autowired
-	 private RdvRepository rr ;
-	 
-	
-	
+	private RdvRepository rr;
+
+	@Autowired
+	private AdresseRepository ar;
+	@Autowired
+	private SpecialiteRepository sr;
+
+	@Autowired
+	private PraticienSpecialiteRepository psr;
 
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("hello world");
-		Patient p = new Patient();
-		Motif m = new Motif();
-		Praticien d = new Praticien();
-		Rdv r = new Rdv();
-		
-		p.setUsername("Patrick");
-		d.setUsername("Pouzet");
-		ArrayList<Specialite> l = new ArrayList<Specialite>();
-		l.add(Specialite.Chirurgien);
-		l.add(Specialite.Dentiste);
-		d.setSpecs(l);
-		m.setPraticien(d);
-		m.setDuree(60);
-		r.setPraticien(d);
-		r.setPatient(p);
-		r.setMotif(m);
-		pr.save(p);
-		mr.save(m);
-		dr.save(d);
-		rr.save(r);
+//jeuxDeDonnees();
+
 		System.out.println("goodbye world");
 		/*
 		 * for (User user : userRepository.findAll()) {
-		 * user.setPassword(passwordEncoder.encode(user.getPassword()); 
-		 * userRepository.save(user);
-		 * }
+		 * user.setPassword(passwordEncoder.encode(user.getPassword());
+		 * userRepository.save(user); }
 		 */
-		
+
 	}
 
 	/*
@@ -108,5 +101,55 @@ public class ApplicationService implements CommandLineRunner {
 	 * private void delete(String url) { System.out.println("delete"); RestTemplate
 	 * rt = new RestTemplate(); rt.delete(url); }
 	 */
+public void jeuxDeDonnees() {
+	// Test Patient
+			Patient p = new Patient();
+			p.setUsername("patrick");
+			p.setEnable(true);
+			p.setNom("Bruel");
+			p.setPrenom("Patrick");
+			pr.save(p);
 
+			// Test Praticien et Adresse
+			Praticien d = new Praticien();
+			d.setNom("Pouzet");
+			d.setPrenom("Martial");
+			d.setEnable(true);
+			d.setUsername("pouzet");
+			Adresse a = new Adresse(9, "rue Rougemont", "75009", "Paris");
+			a.setPraticien(d);
+			dr.save(d);
+			ar.save(a);
+
+			// Test Specialites
+			Specialite s1 = new Specialite();
+			s1.setSpecialite("Gynécologue");
+			Specialite s2 = new Specialite();
+			s2.setSpecialite("Cardiologue");
+
+			PraticienSpecialite ps1 = new PraticienSpecialite();
+			ps1.setKey(new PraticienSpecialiteKey(d, s1));
+
+			PraticienSpecialite ps2 = new PraticienSpecialite();
+			ps2.setKey(new PraticienSpecialiteKey(d, s2));
+
+			// psr.save(ps1);
+			// psr.save(ps2);
+
+			// Test Motif
+			Motif m = new Motif();
+			m.setDuree(30);
+			m.setLibelle("première consultation");
+			m.setPraticien(d);
+
+			mr.save(m);
+
+			// Test RDV
+			Rdv r = new Rdv();
+			r.setMotif(m);
+			r.setPatient(p);
+			r.setPraticien(d);
+
+			rr.save(r);
+}
 }

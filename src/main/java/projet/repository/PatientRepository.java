@@ -10,7 +10,10 @@ import projet.metier.User;
 
 public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
-	@Query("select distinct pat from User pat left join fetch pat.prdv prdv left join fetch where pat.username=:username")
-	Optional<User> FindByIdWithUsernames(String username);
+	@Query("select pat from User pat where pat.username=:username")
+	Optional<Patient> findByUsername(String username);
+	
+	//@Query("select pat from User pat left join fetch pat.prdv prdv left join fetch where pat.username=:username")
+	//Optional<Patient> findByUsernameWithRdv(String username);
 	
 }

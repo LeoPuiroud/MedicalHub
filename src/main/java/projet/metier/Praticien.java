@@ -3,15 +3,8 @@ package projet.metier;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-
 import com.fasterxml.jackson.annotation.JsonView;
 
 import projet.metier.view.JsonViews;
@@ -32,24 +25,22 @@ public class Praticien extends User {
 	@OneToMany(mappedBy = "praticien")
 	@JsonView(JsonViews.PraticienAvecRdv.class)
 	private List<Rdv> drdv;
-
-	@Embedded
-	@JsonView(JsonViews.PraticienAvecSpecialite.class)
-	private List<Specialite> specs;
-
-	@Embedded
+	
+	@OneToMany(mappedBy = "key.praticien")
+	private List<PraticienSpecialite> praticienSpecialite;
+	
+	@OneToMany(mappedBy="praticien")
 	private List<Adresse> adresses;
 
 	@OneToMany(mappedBy = "praticien")
 	private List<Motif> motifs;
 
-	public Praticien(String nom, String prenom, List<Rdv> drdv, List<Specialite> specs,
+	public Praticien(String nom, String prenom, List<Rdv> drdv,
 			List<Adresse> adresses, List<Motif> motifs) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.drdv = drdv;
-		this.specs = specs;
 		this.adresses = adresses;
 		this.motifs = motifs;
 	}
@@ -82,13 +73,6 @@ public class Praticien extends User {
 		this.drdv = drdv;
 	}
 
-	public List<Specialite> getSpecs() {
-		return specs;
-	}
-
-	public void setSpecs(List<Specialite> specs) {
-		this.specs = specs;
-	}
 
 	public List<Adresse> getAdresses() {
 		return adresses;
@@ -106,6 +90,14 @@ public class Praticien extends User {
 		this.motifs = motifs;
 	}
 
+	public List<PraticienSpecialite> getPraticienSpecialite() {
+		return praticienSpecialite;
+	}
+
+	public void setPraticienSpecialite(List<PraticienSpecialite> praticienSpecialite) {
+		this.praticienSpecialite = praticienSpecialite;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -115,7 +107,6 @@ public class Praticien extends User {
 		result = prime * result + ((motifs == null) ? 0 : motifs.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-		result = prime * result + ((specs == null) ? 0 : specs.hashCode());
 		return result;
 	}
 
@@ -152,11 +143,6 @@ public class Praticien extends User {
 			if (other.prenom != null)
 				return false;
 		} else if (!prenom.equals(other.prenom))
-			return false;
-		if (specs == null) {
-			if (other.specs != null)
-				return false;
-		} else if (!specs.equals(other.specs))
 			return false;
 		return true;
 	}

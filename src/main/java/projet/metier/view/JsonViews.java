@@ -25,5 +25,12 @@ public static class MotifAvecPraticien extends Common{
 public static class PatientAvecRdv extends Common{
 		
 	};
+	
+public static class AdresseAvecPraticien extends Common{
+		
+	};
+public static class SpecialiteAvecPraticien extends Common{
+		
+	};
 
 }
