@@ -27,7 +27,7 @@ public class Rdv {
 	@ManyToOne 
 	private Patient patient;
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date date;
+	private Date date; 
 	@ManyToOne
 	private Motif motif;
 	public Integer getId() {
