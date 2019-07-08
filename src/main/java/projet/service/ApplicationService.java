@@ -55,11 +55,13 @@ public class ApplicationService implements CommandLineRunner {
 		Praticien d = new Praticien();
 		Rdv r = new Rdv();
 		
+		p.setUsername("Patrick");
+		d.setUsername("Pouzet");
 		pr.save(p);
 		mr.save(m);
 		dr.save(d);
 		rr.save(r);
-		
+		System.out.println("goodbye world");
 		/*
 		 * for (User user : userRepository.findAll()) {
 		 * user.setPassword(passwordEncoder.encode(user.getPassword()); 
