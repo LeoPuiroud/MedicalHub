@@ -1,27 +1,22 @@
 package projet.service;
 
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 
-import projet.ProjetMedicalHubApplication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import projet.metier.Motif;
 import projet.metier.Patient;
 import projet.metier.Praticien;
 import projet.metier.Rdv;
-import projet.metier.User;
+import projet.metier.Specialite;
 import projet.repository.MotifRepository;
 import projet.repository.PatientRepository;
 import projet.repository.PraticienRepository;
 import projet.repository.RdvRepository;
 import projet.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ApplicationService implements CommandLineRunner {
@@ -57,6 +52,15 @@ public class ApplicationService implements CommandLineRunner {
 		
 		p.setUsername("Patrick");
 		d.setUsername("Pouzet");
+		ArrayList<Specialite> l = new ArrayList<Specialite>();
+		l.add(Specialite.Chirurgien);
+		l.add(Specialite.Dentiste);
+		d.setSpecs(l);
+		m.setPraticien(d);
+		m.setDuree(60);
+		r.setPraticien(d);
+		r.setPatient(p);
+		r.setMotif(m);
 		pr.save(p);
 		mr.save(m);
 		dr.save(d);

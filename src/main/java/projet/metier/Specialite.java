@@ -1,6 +1,9 @@
 package projet.metier;
 
+import javax.persistence.Enumerated;
+
+
 public enum Specialite {
-	Gynécologue, Generaliste, Dentiste, Ophtalmologiste, Psychiatre, ORL, Podologue, Proctologue, Endocrinologiste, Homeopathe, Osteologue, Chirurgien, Anesthesiste;
+	Gynecologue, Generaliste, Dentiste, Ophtalmologiste, Psychiatre, ORL, Podologue, Proctologue, Endocrinologiste, Homeopathe, Osteologue, Chirurgien, Anesthesiste;
 
 }
