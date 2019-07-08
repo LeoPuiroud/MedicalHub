@@ -66,16 +66,16 @@ public class PraticienRestController {
 	@GetMapping(value= {"/{id}"})
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<Praticien> findById(@PathVariable(name="id")Integer id){
-		return findById(id);
+		return findPraticienById(id);
 	}
 	
-	@GetMapping(value= {"/{id}/arme"})
+	@GetMapping(value= {"/{id}/rdv"})
 	@JsonView(JsonViews.PraticienAvecRdv.class)
 	public ResponseEntity<Praticien> findByIdWithRdv(@PathVariable(name="id")Integer id){
-		return findById(id);
+		return findPraticienById(id);
 	}
 	
-	private ResponseEntity<Praticien> findSoldatById( Integer id){
+	private ResponseEntity<Praticien> findPraticienById( Integer id){
 		Optional<Praticien> opt=praticienRepository.findById(id);
 		if (opt.isPresent()) {
 			return new ResponseEntity<Praticien>(opt.get(), HttpStatus.OK);

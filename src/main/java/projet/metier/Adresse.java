@@ -79,15 +79,19 @@ public class Adresse {
 		this.praticien = praticien;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cp == null) ? 0 : cp.hashCode());
-		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
-		result = prime * result + ((praticien == null) ? 0 : praticien.hashCode());
-		result = prime * result + ((rue == null) ? 0 : rue.hashCode());
-		result = prime * result + ((ville == null) ? 0 : ville.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -100,34 +104,14 @@ public class Adresse {
 		if (getClass() != obj.getClass())
 			return false;
 		Adresse other = (Adresse) obj;
-		if (cp == null) {
-			if (other.cp != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!cp.equals(other.cp))
-			return false;
-		if (numero == null) {
-			if (other.numero != null)
-				return false;
-		} else if (!numero.equals(other.numero))
-			return false;
-		if (praticien == null) {
-			if (other.praticien != null)
-				return false;
-		} else if (!praticien.equals(other.praticien))
-			return false;
-		if (rue == null) {
-			if (other.rue != null)
-				return false;
-		} else if (!rue.equals(other.rue))
-			return false;
-		if (ville == null) {
-			if (other.ville != null)
-				return false;
-		} else if (!ville.equals(other.ville))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-	
+
 	
 	
 	

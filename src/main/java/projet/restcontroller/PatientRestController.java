@@ -37,9 +37,6 @@ public class PatientRestController {
 	@Autowired
 	private PatientRepository patientRepository;
 	
-	@Autowired
-	private PraticienRepository praticienRepository;
-	
 	@JsonView(JsonViews.Common.class)
 	@GetMapping(value= {"","/"})
 	public ResponseEntity<List<Patient>> findAll(){
@@ -63,7 +60,7 @@ public class PatientRestController {
 		}
 		patientRepository.save(patient);
 		HttpHeaders headers=new HttpHeaders();
-		URI uri=ucb.path("/rest/praticien/{username}").buildAndExpand(patient.getUsername()).toUri();
+		URI uri=ucb.path("/rest/patient/{username}").buildAndExpand(patient.getUsername()).toUri();
 		headers.setLocation(uri);
 		return new ResponseEntity<Void>(headers,HttpStatus.CREATED);
 	}
@@ -72,16 +69,16 @@ public class PatientRestController {
 	@GetMapping(value= {"/{username}"})
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<Patient> findByUsername(@PathVariable(name="username")String username){
-		return findByUsername(username);
+		return findPatientByUsername(username);
 	}
 	
 	@GetMapping(value= {"/{username}/rdv"})
 	@JsonView(JsonViews.PatientAvecRdv.class)
 	public ResponseEntity<Patient> findByUsernameWithRdv(@PathVariable(name="username")String username){
-		return findByUsername(username);
+		return findPatientByUsername(username);
 	}
 	
-	private ResponseEntity<Patient> findPatienttByUsername( String username){
+	private ResponseEntity<Patient> findPatientByUsername( String username){
 		Optional<Patient> opt=patientRepository.findByUsername(username);
 		if (opt.isPresent()) {
 			return new ResponseEntity<Patient>(opt.get(), HttpStatus.OK);
