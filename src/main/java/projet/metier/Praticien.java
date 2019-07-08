@@ -18,11 +18,8 @@ import projet.metier.view.JsonViews;
 
 @Entity
 public class Praticien extends User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqPraticien")
-	@SequenceGenerator(name = "seqPraticien", sequenceName = "seq_praticien", initialValue = 100, allocationSize = 1)
-	@JsonView(JsonViews.Common.class)
-	private Integer id;
+	
+
 
 	@Column(name = "nom_praticien", length = 50)
 	@JsonView(JsonViews.Common.class)
@@ -47,10 +44,9 @@ public class Praticien extends User {
 	@OneToMany(mappedBy = "motif")
 	private List<Motif> motifs;
 
-	public Praticien(Integer id, String nom, String prenom, List<Rdv> drdv, List<Specialite> specs,
+	public Praticien(String nom, String prenom, List<Rdv> drdv, List<Specialite> specs,
 			List<Adresse> adresses, List<Motif> motifs) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.drdv = drdv;
@@ -61,14 +57,6 @@ public class Praticien extends User {
 
 	public Praticien() {
 		super();
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getNom() {
@@ -122,8 +110,13 @@ public class Praticien extends User {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		int result = super.hashCode();
+		result = prime * result + ((adresses == null) ? 0 : adresses.hashCode());
+		result = prime * result + ((drdv == null) ? 0 : drdv.hashCode());
+		result = prime * result + ((motifs == null) ? 0 : motifs.hashCode());
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+		result = prime * result + ((specs == null) ? 0 : specs.hashCode());
 		return result;
 	}
 
@@ -131,17 +124,43 @@ public class Praticien extends User {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Praticien other = (Praticien) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (adresses == null) {
+			if (other.adresses != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!adresses.equals(other.adresses))
+			return false;
+		if (drdv == null) {
+			if (other.drdv != null)
+				return false;
+		} else if (!drdv.equals(other.drdv))
+			return false;
+		if (motifs == null) {
+			if (other.motifs != null)
+				return false;
+		} else if (!motifs.equals(other.motifs))
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (prenom == null) {
+			if (other.prenom != null)
+				return false;
+		} else if (!prenom.equals(other.prenom))
+			return false;
+		if (specs == null) {
+			if (other.specs != null)
+				return false;
+		} else if (!specs.equals(other.specs))
 			return false;
 		return true;
 	}
 
+	
 }

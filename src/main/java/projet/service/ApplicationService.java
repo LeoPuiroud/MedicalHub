@@ -5,10 +5,20 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import projet.ProjetMedicalHubApplication;
+import projet.metier.Motif;
+import projet.metier.Patient;
+import projet.metier.Praticien;
+import projet.metier.Rdv;
 import projet.metier.User;
+import projet.repository.MotifRepository;
+import projet.repository.PatientRepository;
+import projet.repository.PraticienRepository;
+import projet.repository.RdvRepository;
 import projet.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,10 +31,34 @@ public class ApplicationService implements CommandLineRunner {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	 private PatientRepository pr ;
+	
+	@Autowired
+	 private MotifRepository mr;
+	
+	@Autowired
+	 private PraticienRepository dr ;
+	
+	@Autowired
+	 private RdvRepository rr ;
+	 
+	
+	
 
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("hello world");
+		Patient p = new Patient();
+		Motif m = new Motif();
+		Praticien d = new Praticien();
+		Rdv r = new Rdv();
+		
+		pr.save(p);
+		mr.save(m);
+		dr.save(d);
+		rr.save(r);
 		
 		/*
 		 * for (User user : userRepository.findAll()) {
