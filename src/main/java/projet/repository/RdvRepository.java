@@ -10,7 +10,7 @@ import projet.metier.User;
 
 public interface RdvRepository extends JpaRepository<Rdv, Integer> {
 
-	@Query("select distinct r from Rdv r left join fetch r.praticien left join fetch r.patient left join fetch r.motif where r.id=:id")
-	Optional<User> FindByIdWithUsernames(Integer id);
+	@Query("select distinct r from Rdv r left join fetch r.praticien prat left join fetch r.patient pat left join fetch r.motif m where pat.username=:username")
+	Optional<User> FindByIdWithUsernames(String username);
 	
 }
