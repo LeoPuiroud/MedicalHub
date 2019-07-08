@@ -29,6 +29,7 @@ public class Motif {
 	
 	@ManyToOne
 	@JoinColumn(name="id_praticien")
+	@JsonView(JsonViews.MotifAvecPraticien.class)
 	private Praticien praticien;
 
 	public Motif(Integer id, String libelle, Integer duree, Praticien praticien) {

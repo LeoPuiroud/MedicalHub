@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,6 +36,7 @@ public class Praticien extends User {
 	@JsonView(JsonViews.PraticienAvecRdv.class)
 	private List<Rdv> drdv;
 
+	@Enumerated
 	@OneToMany(mappedBy = "specialite")
 	@JsonView(JsonViews.PraticienAvecSpecialite.class)
 	private List<Specialite> specs;
