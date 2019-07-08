@@ -29,19 +29,18 @@ public class Praticien extends User {
 	@JsonView(JsonViews.Common.class)
 	private String prenom;
 
-	@OneToMany(mappedBy = "rdv")
+	@OneToMany(mappedBy = "praticien")
 	@JsonView(JsonViews.PraticienAvecRdv.class)
 	private List<Rdv> drdv;
 
-	@Enumerated
-	@OneToMany(mappedBy = "specialite")
+	@Embedded
 	@JsonView(JsonViews.PraticienAvecSpecialite.class)
 	private List<Specialite> specs;
 
 	@Embedded
 	private List<Adresse> adresses;
 
-	@OneToMany(mappedBy = "motif")
+	@OneToMany(mappedBy = "praticien")
 	private List<Motif> motifs;
 
 	public Praticien(String nom, String prenom, List<Rdv> drdv, List<Specialite> specs,

@@ -22,7 +22,7 @@ public class User {
 	@Id
 	private String username;
 	private String password;
-	private boolean enable;
+	private boolean enable = true;
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
 	private List<UserRole> roles;
 	

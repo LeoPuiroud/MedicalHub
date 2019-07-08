@@ -23,7 +23,7 @@ public class Patient extends User {
 	@Column(name= "prenom_patient", length = 50)
 	@JsonView(JsonViews.Common.class)
 	private String prenom;
-	@OneToMany(mappedBy = "rdv")
+	@OneToMany(mappedBy = "patient")
 	@JsonView(JsonViews.PatientAvecRdv.class)
 	private List<Rdv> prdv;
 	
