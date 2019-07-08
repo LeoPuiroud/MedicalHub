@@ -10,6 +10,6 @@ import projet.metier.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query("select distinct u from User u left join fetch u.roles where u.username=:username")
-	Optional<User> FindByIdWithUsernames(String username);
+	Optional<User> findByIdWithRoles(String username);
 
 }
