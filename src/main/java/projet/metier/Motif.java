@@ -16,8 +16,8 @@ import projet.metier.view.JsonViews;
 public class Motif {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqPraticien")
-	@SequenceGenerator(name = "seqPraticien", sequenceName = "seq_praticien", initialValue = 400, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqMotif")
+	@SequenceGenerator(name = "seqMotif", sequenceName = "seq_motif", initialValue = 400, allocationSize = 1)
 	@JsonView(JsonViews.Common.class)
 	private Integer id;
 	

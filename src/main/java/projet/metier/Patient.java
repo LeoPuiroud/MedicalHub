@@ -16,11 +16,7 @@ import projet.metier.view.JsonViews;
 
 @Entity
 public class Patient extends User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator= "seqPatient")
-	@SequenceGenerator(name= "seqPatient", sequenceName="seq_patient", initialValue = 100, allocationSize = 1 )
-	@JsonView(JsonViews.Common.class)
-	private Integer id;
+
 	@Column(name= "nom_patient", length = 50)
 	@JsonView(JsonViews.Common.class)
 	private String nom;
@@ -30,12 +26,7 @@ public class Patient extends User {
 	@OneToMany(mappedBy = "rdv")
 	@JsonView(JsonViews.PatientAvecRdv.class)
 	private List<Rdv> prdv;
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	
 	public String getNom() {
 		return nom;
 	}
@@ -54,12 +45,15 @@ public class Patient extends User {
 	public void setPrdv(List<Rdv> prdv) {
 		this.prdv = prdv;
 	}
+	
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((prdv == null) ? 0 : prdv.hashCode());
 		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
 		return result;
 	}
@@ -72,15 +66,15 @@ public class Patient extends User {
 		if (getClass() != obj.getClass())
 			return false;
 		Patient other = (Patient) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
 		if (nom == null) {
 			if (other.nom != null)
 				return false;
 		} else if (!nom.equals(other.nom))
+			return false;
+		if (prdv == null) {
+			if (other.prdv != null)
+				return false;
+		} else if (!prdv.equals(other.prdv))
 			return false;
 		if (prenom == null) {
 			if (other.prenom != null)
@@ -89,7 +83,6 @@ public class Patient extends User {
 			return false;
 		return true;
 	}
-	
 	public Patient() {}
 	
 }
