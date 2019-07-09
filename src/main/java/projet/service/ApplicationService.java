@@ -57,7 +57,7 @@ public class ApplicationService implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("hello world");
-		//jeuxDeDonnees();
+		jeuxDeDonnees();
 
 		System.out.println("goodbye world");
 		/*
@@ -115,27 +115,52 @@ public class ApplicationService implements CommandLineRunner {
 
 		// Test Praticien et Adresse
 		Praticien d = new Praticien();
+		Praticien d2 = new Praticien();
 		d.setNom("Mastour");
 		d.setPrenom("Romain");
 		d.setEnable(true);
 		d.setUsername("mastour");
-		//Adresse a = new Adresse(9, "rue Rougemont", "75009", "Paris");
-		//a.setPraticien(d);
+		d2.setNom("Pouzet");
+		d2.setPrenom("Martial");
+		d2.setEnable(true);
+		d2.setUsername("pouzet");
+		Adresse a = new Adresse(9, "rue Rougemont", "75009", "Paris");
+		Adresse a2 = new Adresse(57, "rue Cadet", "75009", "Paris");
+		Adresse a3 = new Adresse(25, "rue de Rivoli", "75001", "Paris");
+		
 		dr.save(d);
-		//ar.save(a);
-
+		dr.save(d2);
+		ar.save(a);
+		ar.save(a2);
+		ar.save(a3);
+		a.setPraticien(d);
+		a2.setPraticien(d2);
+		a3.setPraticien(d2);
 		// Test Specialites
 		Specialite s1 = new Specialite();
 		s1.setSpecialite("Gynécologue");
 		Specialite s2 = new Specialite();
 		s2.setSpecialite("Cardiologue");
+		Specialite s3 = new Specialite();
+		s3.setSpecialite("Fluor");
 
 		sr.save(s1);
+		sr.save(s2);
+		sr.save(s3);
+		
 		
 		PraticienSpecialite ps1 = new PraticienSpecialite();
 		PraticienSpecialiteKey psk1= new PraticienSpecialiteKey(d,s1);
 		
+		PraticienSpecialite ps2 = new PraticienSpecialite();
+		PraticienSpecialiteKey psk2= new PraticienSpecialiteKey(d,s2);
+		
+		PraticienSpecialite ps3 = new PraticienSpecialite();
+		PraticienSpecialiteKey psk3= new PraticienSpecialiteKey(d2,s3);
+		
 		ps1.setKey(psk1);
+		ps2.setKey(psk2);
+		ps3.setKey(psk3);
 
 		//PraticienSpecialite ps2 = new PraticienSpecialite();
 		//ps2.setKey(new PraticienSpecialiteKey(d, s2));
@@ -143,6 +168,8 @@ public class ApplicationService implements CommandLineRunner {
 		System.out.println(ps1.getKey());
 		System.out.println(ps1);
 		psr.save(ps1);
+		psr.save(ps2);
+		psr.save(ps3);
 		// psr.save(ps2);
 
 		/*
