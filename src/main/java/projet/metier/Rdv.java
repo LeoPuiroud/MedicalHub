@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -23,16 +24,25 @@ public class Rdv {
 	@JsonView(JsonViews.Common.class)
 	private Integer id;
 	@ManyToOne 
+	@JsonView(JsonViews.RdvAvecPraticien.class)
 	private Praticien praticien;
 	@ManyToOne 
+	@JsonView(JsonViews.RdvAvecPatient.class)
 	private Patient patient;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonView(JsonViews.Common.class)
 	private Date dateD; 
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonView(JsonViews.Common.class)
 	private Date dateF; 
 	@ManyToOne
+	@JsonView(JsonViews.Common.class)
 	private Motif motif;
+	
+	@Version
+	private Integer version;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -69,6 +79,14 @@ public class Rdv {
 	}
 	public void setMotif(Motif motif) {
 		this.motif = motif;
+	}
+	
+	
+	public Integer getVersion() {
+		return version;
+	}
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 	public Rdv() {
 	}

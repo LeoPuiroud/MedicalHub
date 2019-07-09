@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -25,6 +26,9 @@ public class User {
 	private boolean enable = true;
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
 	private List<UserRole> roles;
+	
+	@Version
+	private Integer version;
 	
 	public User() {
 		
@@ -70,6 +74,20 @@ public class User {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
+
+
+
+	public Integer getVersion() {
+		return version;
+	}
+
+
+
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
 
 
 

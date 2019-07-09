@@ -30,9 +30,11 @@ public class Praticien extends User {
 	private List<PraticienSpecialite> praticienSpecialite;
 	
 	@OneToMany(mappedBy="praticien")
+	@JsonView(JsonViews.PraticienAvecAdresse.class)
 	private List<Adresse> adresses;
 
 	@OneToMany(mappedBy = "praticien")
+	@JsonView(JsonViews.PraticienAvecMotif.class)
 	private List<Motif> motifs;
 
 	public Praticien(String nom, String prenom, List<Rdv> drdv,

@@ -101,6 +101,13 @@ public class ApplicationService implements CommandLineRunner {
 	 * private void delete(String url) { System.out.println("delete"); RestTemplate
 	 * rt = new RestTemplate(); rt.delete(url); }
 	 */
+	
+	public void testQueries() {
+		System.out.println(ar.findByIdWithPraticien(101).get());
+		System.out.println(mr.findByIdWithPraticien(401).get());
+		
+		
+	}
 public void jeuxDeDonnees() {
 	// Test Patient
 			Patient p = new Patient();

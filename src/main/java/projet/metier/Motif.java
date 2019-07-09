@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -31,6 +32,9 @@ public class Motif {
 	@JoinColumn(name="id_praticien")
 	@JsonView(JsonViews.MotifAvecPraticien.class)
 	private Praticien praticien;
+	
+	@Version
+	private Integer version;
 
 	public Motif(Integer id, String libelle, Integer duree, Praticien praticien) {
 		super();
@@ -74,6 +78,16 @@ public class Motif {
 
 	public void setPraticien(Praticien praticien) {
 		this.praticien = praticien;
+	}
+
+	
+	
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 
 	@Override

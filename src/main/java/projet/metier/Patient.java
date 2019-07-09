@@ -27,6 +27,8 @@ public class Patient extends User {
 	@JsonView(JsonViews.PatientAvecRdv.class)
 	private List<Rdv> prdv;
 	
+	
+	
 	public String getNom() {
 		return nom;
 	}

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -36,6 +37,9 @@ public class Adresse {
 	@ManyToOne
 	@JsonView(JsonViews.AdresseAvecPraticien.class)
 	private Praticien praticien;
+	
+	@Version
+	private Integer version;
 	
 	
 	public Adresse() {}
@@ -85,6 +89,15 @@ public class Adresse {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 
 	@Override
