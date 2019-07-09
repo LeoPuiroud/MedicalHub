@@ -38,7 +38,7 @@ public class PatientRestController {
 	private PatientRepository patientRepository;
 	
 	@JsonView(JsonViews.Common.class)
-	@GetMapping(value= {"","/"})
+	@GetMapping(value= {""})
 	public ResponseEntity<List<Patient>> findAll(){
 		return list();
 	}
