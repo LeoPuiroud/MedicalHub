@@ -58,7 +58,10 @@ public class PraticienRestController {
 	}
 	
 	public ResponseEntity<List<Praticien>> list(){
-		return new ResponseEntity<List<Praticien>>(praticienRepository.findAll(),HttpStatus.OK);
+		List<Praticien> lp = praticienRepository.findAll();
+		for (Praticien p : lp) 
+		System.out.println(p.getPraticienSpecialite());
+		return new ResponseEntity<List<Praticien>>(lp,HttpStatus.OK);
 	}
 	
 	@PostMapping(value= {"","/"})
