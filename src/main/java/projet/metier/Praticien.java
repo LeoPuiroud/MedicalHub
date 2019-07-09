@@ -26,7 +26,9 @@ public class Praticien extends User {
 	@JsonView(JsonViews.PraticienAvecRdv.class)
 	private List<Rdv> drdv;
 	
+	
 	@OneToMany(mappedBy = "key.praticien")
+	@JsonView(JsonViews.PraticienAvecSpecialite.class)
 	private List<PraticienSpecialite> praticienSpecialite;
 	
 	@OneToMany(mappedBy="praticien")

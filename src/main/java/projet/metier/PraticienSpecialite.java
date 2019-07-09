@@ -4,10 +4,15 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projet.metier.view.JsonViews;
+
 @Entity
 @Table(name = "join_praticien_specialite")
 public class PraticienSpecialite {
 	@EmbeddedId
+	@JsonView(JsonViews.PraticienAvecSpecialite.class)
 	private PraticienSpecialiteKey key;
 	
 	public PraticienSpecialiteKey getKey() {

@@ -6,6 +6,10 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projet.metier.view.JsonViews;
+
 @Embeddable
 public class PraticienSpecialiteKey implements Serializable {
 
@@ -15,8 +19,10 @@ public class PraticienSpecialiteKey implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@ManyToOne
 	@JoinColumn(name = "join_praticien_id")
+	@JsonView(JsonViews.SpecialiteAvecPraticien.class)
 	private Praticien praticien;
 	@ManyToOne
+	@JsonView(JsonViews.PraticienAvecSpecialite.class)
 	@JoinColumn(name = "join_specialite_id")
 	private Specialite specialite;
 

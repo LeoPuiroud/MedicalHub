@@ -46,6 +46,16 @@ public class PraticienRestController {
 	public ResponseEntity<List<Praticien>> findAllWithRdv(){
 		return list();
 	}
+	@JsonView(JsonViews.PraticienAvecMotif.class)
+	@GetMapping(value= {"/motif"})
+	public ResponseEntity<List<Praticien>> findAllWithMotif(){
+		return list();
+	}
+	@JsonView(JsonViews.PraticienAvecSpecialite.class)
+	@GetMapping(value= {"/specialite"})
+	public ResponseEntity<List<Praticien>> findAllWithSpecialite(){
+		return list();
+	}
 	
 	public ResponseEntity<List<Praticien>> list(){
 		return new ResponseEntity<List<Praticien>>(praticienRepository.findAll(),HttpStatus.OK);
