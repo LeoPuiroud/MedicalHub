@@ -57,7 +57,7 @@ public class ApplicationService implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("hello world");
-//jeuxDeDonnees();
+		//jeuxDeDonnees();
 
 		System.out.println("goodbye world");
 		/*
@@ -101,62 +101,60 @@ public class ApplicationService implements CommandLineRunner {
 	 * private void delete(String url) { System.out.println("delete"); RestTemplate
 	 * rt = new RestTemplate(); rt.delete(url); }
 	 */
-	
+
 	public void testQueries() {
 		System.out.println(ar.findByIdWithPraticien(101).get());
 		System.out.println(mr.findByIdWithPraticien(401).get());
-		
-		
+
 	}
-public void jeuxDeDonnees() {
-	// Test Patient
-			Patient p = new Patient();
-			p.setUsername("patrick");
-			p.setEnable(true);
-			p.setNom("Bruel");
-			p.setPrenom("Patrick");
-			pr.save(p);
 
-			// Test Praticien et Adresse
-			Praticien d = new Praticien();
-			d.setNom("Pouzet");
-			d.setPrenom("Martial");
-			d.setEnable(true);
-			d.setUsername("pouzet");
-			Adresse a = new Adresse(9, "rue Rougemont", "75009", "Paris");
-			a.setPraticien(d);
-			dr.save(d);
-			ar.save(a);
+	public void jeuxDeDonnees() {
 
-			// Test Specialites
-			Specialite s1 = new Specialite();
-			s1.setSpecialite("Gynécologue");
-			Specialite s2 = new Specialite();
-			s2.setSpecialite("Cardiologue");
+		// Test Patient Patient p = new Patient(); p.setUsername("patrick");
+		// p.setEnable(true); p.setNom("Bruel"); p.setPrenom("Patrick"); pr.save(p);
 
-			PraticienSpecialite ps1 = new PraticienSpecialite();
-			ps1.setKey(new PraticienSpecialiteKey(d, s1));
+		// Test Praticien et Adresse
+		Praticien d = new Praticien();
+		d.setNom("Mastour");
+		d.setPrenom("Romain");
+		d.setEnable(true);
+		d.setUsername("mastour");
+		//Adresse a = new Adresse(9, "rue Rougemont", "75009", "Paris");
+		//a.setPraticien(d);
+		dr.save(d);
+		//ar.save(a);
 
-			PraticienSpecialite ps2 = new PraticienSpecialite();
-			ps2.setKey(new PraticienSpecialiteKey(d, s2));
+		// Test Specialites
+		Specialite s1 = new Specialite();
+		s1.setSpecialite("Gynécologue");
+		Specialite s2 = new Specialite();
+		s2.setSpecialite("Cardiologue");
 
-			// psr.save(ps1);
-			// psr.save(ps2);
+		sr.save(s1);
+		
+		PraticienSpecialite ps1 = new PraticienSpecialite();
+		PraticienSpecialiteKey psk1= new PraticienSpecialiteKey(d,s1);
+		
+		ps1.setKey(psk1);
 
-			// Test Motif
-			Motif m = new Motif();
-			m.setDuree(30);
-			m.setLibelle("première consultation");
-			m.setPraticien(d);
+		//PraticienSpecialite ps2 = new PraticienSpecialite();
+		//ps2.setKey(new PraticienSpecialiteKey(d, s2));
 
-			mr.save(m);
+		System.out.println(ps1.getKey());
+		System.out.println(ps1);
+		psr.save(ps1);
+		// psr.save(ps2);
 
-			// Test RDV
-			Rdv r = new Rdv();
-			r.setMotif(m);
-			r.setPatient(p);
-			r.setPraticien(d);
-
-			rr.save(r);
-}
+		/*
+		 * // Test Motif Motif m = new Motif(); m.setDuree(30);
+		 * m.setLibelle("première consultation"); m.setPraticien(d);
+		 * 
+		 * mr.save(m);
+		 * 
+		 * // Test RDV Rdv r = new Rdv(); r.setMotif(m); r.setPatient(p);
+		 * r.setPraticien(d);
+		 * 
+		 * rr.save(r);
+		 */
+	}
 }
