@@ -51,9 +51,10 @@ public class PraticienRestController {
 	public ResponseEntity<List<Praticien>> findAllWithMotif(){
 		return list();
 	}
+	@CrossOrigin(origins="*")
 	@JsonView(JsonViews.PraticienAvecSpecialite.class)
 	@GetMapping(value= {"/specialite"})
-	public ResponseEntity<List<Praticien>> findAllWithSpecialite(){
+	public ResponseEntity<List<Praticien>> findAllWithSpecialiteAndAdresse(){
 		return list();
 	}
 	
@@ -123,5 +124,23 @@ public class PraticienRestController {
 		}
 		return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
+	@CrossOrigin(origins="*")
+	@JsonView(JsonViews.PraticienAvecSpecialite.class)
+	@GetMapping("/rspe/{spe}")
+	public ResponseEntity<List<Praticien>> searchPratSpe(@PathVariable (name="spe") String s) {
+		return new ResponseEntity<List<Praticien>>(praticienRepository.findAllCustom1(s.toLowerCase()) , HttpStatus.OK);
+	}
+	@CrossOrigin(origins="*")
+	@JsonView(JsonViews.PraticienAvecSpecialite.class)
+	@GetMapping("/rville/{spe}")
+	public ResponseEntity<List<Praticien>> searchPratVille(@PathVariable (name="spe") String s) {
+		return new ResponseEntity<List<Praticien>>(praticienRepository.findAllCustom2(s.toLowerCase()) , HttpStatus.OK);
+	}
+	@CrossOrigin(origins="*")
+	@JsonView(JsonViews.PraticienAvecSpecialite.class)
+	@GetMapping("/rnom/{spe}")
+	public ResponseEntity<List<Praticien>> searchPratNom(@PathVariable (name="spe") String s) {
+		return new ResponseEntity<List<Praticien>>(praticienRepository.findAllCustom3(s.toLowerCase()) , HttpStatus.OK);
+	}
+	
 }

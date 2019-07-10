@@ -16,7 +16,7 @@ public class Praticien extends User {
 
 	@Column(name = "nom_praticien", length = 50)
 	@JsonView(JsonViews.Common.class)
-	private String nom;
+	private String nom_praticien;
 
 	@Column(name = "prenom_praticien", length = 30)
 	@JsonView(JsonViews.Common.class)
@@ -32,7 +32,7 @@ public class Praticien extends User {
 	private List<PraticienSpecialite> praticienSpecialite;
 	
 	@OneToMany(mappedBy="praticien")
-	@JsonView(JsonViews.PraticienAvecAdresse.class)
+	@JsonView(JsonViews.PraticienAvecSpecialite.class)
 	private List<Adresse> adresses;
 
 	@OneToMany(mappedBy = "praticien")
@@ -42,7 +42,7 @@ public class Praticien extends User {
 	public Praticien(String nom, String prenom, List<Rdv> drdv,
 			List<Adresse> adresses, List<Motif> motifs) {
 		super();
-		this.nom = nom;
+		this.nom_praticien = nom;
 		this.prenom = prenom;
 		this.drdv = drdv;
 		this.adresses = adresses;
@@ -54,11 +54,11 @@ public class Praticien extends User {
 	}
 
 	public String getNom() {
-		return nom;
+		return nom_praticien;
 	}
 
 	public void setNom(String nom) {
-		this.nom = nom;
+		this.nom_praticien = nom;
 	}
 
 	public String getPrenom() {
@@ -109,7 +109,7 @@ public class Praticien extends User {
 		result = prime * result + ((adresses == null) ? 0 : adresses.hashCode());
 		result = prime * result + ((drdv == null) ? 0 : drdv.hashCode());
 		result = prime * result + ((motifs == null) ? 0 : motifs.hashCode());
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((nom_praticien == null) ? 0 : nom_praticien.hashCode());
 		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
 		return result;
 	}
@@ -138,10 +138,10 @@ public class Praticien extends User {
 				return false;
 		} else if (!motifs.equals(other.motifs))
 			return false;
-		if (nom == null) {
-			if (other.nom != null)
+		if (nom_praticien == null) {
+			if (other.nom_praticien != null)
 				return false;
-		} else if (!nom.equals(other.nom))
+		} else if (!nom_praticien.equals(other.nom_praticien))
 			return false;
 		if (prenom == null) {
 			if (other.prenom != null)

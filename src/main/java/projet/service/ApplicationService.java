@@ -143,6 +143,9 @@ public class ApplicationService implements CommandLineRunner {
 		s2.setSpecialite("Cardiologue");
 		Specialite s3 = new Specialite();
 		s3.setSpecialite("Fluor");
+		ar.save(a);
+		ar.save(a2);
+		ar.save(a3);
 
 		sr.save(s1);
 		sr.save(s2);
