@@ -1,6 +1,11 @@
 package projet.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +63,7 @@ public class ApplicationService implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("hello world");
 		jeuxDeDonnees();
-
+		rdvs();
 		System.out.println("goodbye world");
 		/*
 		 * for (User user : userRepository.findAll()) {
@@ -66,6 +71,44 @@ public class ApplicationService implements CommandLineRunner {
 		 * userRepository.save(user); }
 		 */
 
+	}
+
+	public void rdvs() throws ParseException {
+		Praticien d = dr.findByUsernameWithRdv("pouzet").get();
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+
+		List<Rdv> drdv= new ArrayList<Rdv>();
+		
+		Date dateI = format.parse("01/07/2019, 08:00");
+		Date dateF = format.parse("31/07/2019, 21:00");
+		Date current=dateI;
+		
+		
+		while (current.before(dateF)) {
+			for (int i=0; i<24; i++) {
+			Rdv rdv=new Rdv();
+			rdv.setStart(current);
+			rdv.setPraticien(d);
+			drdv.add(rdv);
+			
+			
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(current);
+			calendar.add(Calendar.MINUTE, 30);
+			current=calendar.getTime();
+			rdv.setDend(current);
+			rr.save(rdv);
+
+			}
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(current);
+			calendar.add(Calendar.HOUR, 12);
+			current=calendar.getTime();
+			
+		}
+		d.setDrdv(drdv);
+		//dr.save(d);
+		
 	}
 
 	/*
@@ -127,7 +170,7 @@ public class ApplicationService implements CommandLineRunner {
 		Adresse a = new Adresse(9, "rue Rougemont", "75009", "Paris");
 		Adresse a2 = new Adresse(57, "rue Cadet", "75009", "Paris");
 		Adresse a3 = new Adresse(25, "rue de Rivoli", "75001", "Paris");
-		
+
 		dr.save(d);
 		dr.save(d2);
 		ar.save(a);
@@ -147,23 +190,22 @@ public class ApplicationService implements CommandLineRunner {
 		sr.save(s1);
 		sr.save(s2);
 		sr.save(s3);
-		
-		
+
 		PraticienSpecialite ps1 = new PraticienSpecialite();
-		PraticienSpecialiteKey psk1= new PraticienSpecialiteKey(d,s1);
-		
+		PraticienSpecialiteKey psk1 = new PraticienSpecialiteKey(d, s1);
+
 		PraticienSpecialite ps2 = new PraticienSpecialite();
-		PraticienSpecialiteKey psk2= new PraticienSpecialiteKey(d,s2);
-		
+		PraticienSpecialiteKey psk2 = new PraticienSpecialiteKey(d, s2);
+
 		PraticienSpecialite ps3 = new PraticienSpecialite();
-		PraticienSpecialiteKey psk3= new PraticienSpecialiteKey(d2,s3);
-		
+		PraticienSpecialiteKey psk3 = new PraticienSpecialiteKey(d2, s3);
+
 		ps1.setKey(psk1);
 		ps2.setKey(psk2);
 		ps3.setKey(psk3);
 
-		//PraticienSpecialite ps2 = new PraticienSpecialite();
-		//ps2.setKey(new PraticienSpecialiteKey(d, s2));
+		// PraticienSpecialite ps2 = new PraticienSpecialite();
+		// ps2.setKey(new PraticienSpecialiteKey(d, s2));
 
 		System.out.println(ps1.getKey());
 		System.out.println(ps1);

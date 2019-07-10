@@ -82,8 +82,8 @@ public class RdvRestController {
 		Optional<Rdv> opt=rdvRepository.findById(id);
 		if (opt.isPresent()) {
 			Rdv rdvEnBase=opt.get();//versionàjour
-			rdvEnBase.setDateD((rdv.getDateD()!=null)?rdv.getDateD():rdvEnBase.getDateD());
-			rdvEnBase.setDateF((rdv.getDateF()!=null)?rdv.getDateF():rdvEnBase.getDateF());
+			rdvEnBase.setStart((rdv.getStart()!=null)?rdv.getStart():rdvEnBase.getStart());
+			rdvEnBase.setDend((rdv.getDend()!=null)?rdv.getDend():rdvEnBase.getDend());
 			rdvEnBase.setMotif((rdv.getMotif()!=null)?rdv.getMotif():rdvEnBase.getMotif());
 			rdvEnBase.setPatient((rdv.getPatient()!=null)?rdv.getPatient():rdvEnBase.getPatient());
 			rdvEnBase.setPraticien((rdv.getPraticien()!=null)?rdv.getPraticien():rdvEnBase.getPraticien());
