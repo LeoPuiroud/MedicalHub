@@ -1,6 +1,7 @@
 package projet.metier;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,13 +33,14 @@ public class Rdv {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonView(JsonViews.Common.class)
-	private Date dateD; 
+	private Date start; 
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonView(JsonViews.Common.class)
-	private Date dateF; 
+	private Date dend; 
 	@ManyToOne
 	@JsonView(JsonViews.Common.class)
 	private Motif motif;
+	
 	
 	@Version
 	private Integer version;
@@ -62,17 +64,20 @@ public class Rdv {
 		this.patient = patient;
 	}
 	
-	public Date getDateD() {
-		return dateD;
+	
+	public Date getStart() {
+		return start;
 	}
-	public void setDateD(Date dateD) {
-		this.dateD = dateD;
+	public void setStart(Date start) {
+		this.start = start;
 	}
-	public Date getDateF() {
-		return dateF;
+
+	
+	public Date getDend() {
+		return dend;
 	}
-	public void setDateF(Date dateF) {
-		this.dateF = dateF;
+	public void setDend(Date dend) {
+		this.dend = dend;
 	}
 	public Motif getMotif() {
 		return motif;

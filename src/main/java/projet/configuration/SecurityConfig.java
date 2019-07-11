@@ -27,10 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		//avec webservice
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).anonymous();
+
 		//http.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic().and().csrf().disable();
 		// définir les accès aux pages
 		// accès à tout
 		http.authorizeRequests().anyRequest().permitAll().and().cors().disable();
+
 
 		// accès libre à toutes les listes
 		//http.authorizeRequests().antMatchers("/").permitAll();
@@ -47,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// authentification en mémoire
-		auth.inMemoryAuthentication().withUser("toto").password("{noop}tutu").roles("ADMIN");
+		//auth.inMemoryAuthentication().withUser("toto").password("{noop}tutu").roles("ADMIN");
 
 		// authentification avec une base de données
 		// avec jdbc
