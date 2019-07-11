@@ -53,12 +53,14 @@ public class Praticien extends User {
 		super();
 	}
 
-	public String getNom() {
+	
+
+	public String getNom_praticien() {
 		return nom_praticien;
 	}
 
-	public void setNom(String nom) {
-		this.nom_praticien = nom;
+	public void setNom_praticien(String nom_praticien) {
+		this.nom_praticien = nom_praticien;
 	}
 
 	public String getPrenom() {

@@ -103,7 +103,7 @@ public class PraticienRestController {
 		if (opt.isPresent()) {
 			Praticien praticienEnBase=opt.get();//versionàjour
 			praticienEnBase.setPrenom((praticien.getPrenom()!=null)?praticien.getPrenom():praticienEnBase.getPrenom());
-			praticienEnBase.setNom((praticien.getNom()!=null)?praticien.getNom():praticienEnBase.getNom());
+			praticienEnBase.setNom_praticien((praticien.getNom_praticien()!=null)?praticien.getNom_praticien():praticienEnBase.getNom_praticien());
 			praticienEnBase.setDrdv((praticien.getDrdv()!=null)?praticien.getDrdv():praticienEnBase.getDrdv());
 			praticienEnBase.setAdresses((praticien.getAdresses()!=null)?praticien.getAdresses():praticienEnBase.getAdresses());
 			//praticienEnBase.setSpecs((praticien.getSpecs()!=null)?praticien.getSpecs():praticienEnBase.getSpecs());

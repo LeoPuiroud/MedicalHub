@@ -11,6 +11,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import projet.service.MyUserDetailsService;
 
@@ -54,6 +57,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().logoutSuccessUrl("/");
 
 	}
+	private static final String[] ALLOWED_ORIGINS = {"http://localhost:4200","http://localhost:8080"};
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/*").allowedOrigins(ALLOWED_ORIGINS);
+            }
+          };
+       }
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {

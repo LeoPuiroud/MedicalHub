@@ -43,6 +43,11 @@ public class MotifRestController {
 	public ResponseEntity<List<Motif>> findAll(){
 		return list();
 	}
+	@JsonView(JsonViews.MotifAvecPraticien.class)
+	@GetMapping(value= {"/praticien"})
+	public ResponseEntity<List<Motif>> findAllWithPraticien(){
+		return list();
+	}
 	
 	
 	public ResponseEntity<List<Motif>> list(){

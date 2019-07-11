@@ -40,7 +40,7 @@ public class JsonViews {
 
 	};
 	
-	public static class RdvAvecPatient extends Common {
+	public static class RdvAvecInfos extends Common {
 
 	};
 

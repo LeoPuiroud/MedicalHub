@@ -25,10 +25,10 @@ public class Rdv {
 	@JsonView(JsonViews.Common.class)
 	private Integer id;
 	@ManyToOne 
-	@JsonView(JsonViews.RdvAvecPraticien.class)
+	@JsonView(JsonViews.RdvAvecInfos.class)
 	private Praticien praticien;
 	@ManyToOne 
-	@JsonView(JsonViews.RdvAvecPatient.class)
+	@JsonView(JsonViews.RdvAvecInfos.class)
 	private Patient patient;
 	
 	@Temporal(TemporalType.TIMESTAMP)

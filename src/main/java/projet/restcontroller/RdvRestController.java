@@ -43,7 +43,11 @@ public class RdvRestController {
 	public ResponseEntity<List<Rdv>> findAll(){
 		return list();
 	}
-	
+	@JsonView(JsonViews.RdvAvecInfos.class)
+	@GetMapping(value= {"/infos"})
+	public ResponseEntity<List<Rdv>> findAllWithInfos(){
+		return list();
+	}
 	
 	private ResponseEntity<Rdv> findRdvByIdWithPraticien(Integer id){
 		Optional<Rdv> opt=rdvRepository.findByIdWithPraticien(id);
@@ -82,7 +86,7 @@ public class RdvRestController {
 		}
 		return new ResponseEntity<Rdv>(HttpStatus.NOT_FOUND);
 	}
-	
+	@CrossOrigin(origins="*")
 	@PutMapping(value= {"/{id}"})
 	public ResponseEntity<Rdv> update(@PathVariable(name="id") Integer id,@Valid@RequestBody Rdv rdv){
 		Optional<Rdv> opt=rdvRepository.findById(id);
