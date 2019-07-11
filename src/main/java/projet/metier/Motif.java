@@ -30,7 +30,7 @@ public class Motif {
 	
 	@ManyToOne
 	@JoinColumn(name="id_praticien")
-	@JsonView(JsonViews.MotifAvecPraticien.class)
+	@JsonView(JsonViews.PraticienAvecSpecialite.class)
 	private Praticien praticien;
 	
 	@Version

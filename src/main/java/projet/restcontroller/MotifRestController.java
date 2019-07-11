@@ -102,4 +102,9 @@ public class MotifRestController {
 		return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
+	@JsonView(JsonViews.PraticienAvecSpecialite.class)
+	@GetMapping("/motif/{spe}")
+	public ResponseEntity<List<Motif>> searchPratMotif(@PathVariable (name="spe") String s) {
+		return new ResponseEntity<List<Motif>>(motifRepository.findAllCustom(s) , HttpStatus.OK);
+	}
 }
