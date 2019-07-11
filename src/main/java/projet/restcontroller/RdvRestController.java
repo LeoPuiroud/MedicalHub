@@ -44,14 +44,9 @@ public class RdvRestController {
 		return list();
 	}
 	
-	@JsonView(JsonViews.Common.class)
-	@GetMapping(value= {"/{id}"})
-	public ResponseEntity<List<Rdv>> findAllWithRdv(){
-		return findRdvById();
-	}
 	
-	private ResponseEntity<Rdv> findRdvById( Integer id){
-		Optional<Rdv> opt=rdvRepository.findById(id);
+	private ResponseEntity<Rdv> findRdvByIdWithPraticien(Integer id){
+		Optional<Rdv> opt=rdvRepository.findByIdWithPraticien(id);
 		if (opt.isPresent()) {
 			return new ResponseEntity<Rdv>(opt.get(), HttpStatus.OK);
 		}
@@ -73,7 +68,6 @@ public class RdvRestController {
 		return new ResponseEntity<Void>(headers,HttpStatus.CREATED);
 	}
 	
-	//trouver un praticien par son id
 	@GetMapping(value= {"/{id}"})
 	@JsonView(JsonViews.Common.class)
 	public ResponseEntity<Rdv> findByUsername(@PathVariable(name="id")Integer id){
