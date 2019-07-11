@@ -44,7 +44,19 @@ public class RdvRestController {
 		return list();
 	}
 	
+	@JsonView(JsonViews.Common.class)
+	@GetMapping(value= {"/{id}"})
+	public ResponseEntity<List<Rdv>> findAllWithRdv(){
+		return findRdvById();
+	}
 	
+	private ResponseEntity<Rdv> findRdvById( Integer id){
+		Optional<Rdv> opt=rdvRepository.findById(id);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Rdv>(opt.get(), HttpStatus.OK);
+		}
+		return new ResponseEntity<Rdv>(HttpStatus.NOT_FOUND);
+	}
 	public ResponseEntity<List<Rdv>> list(){
 		return new ResponseEntity<List<Rdv>>(rdvRepository.findAll(),HttpStatus.OK);
 	}
